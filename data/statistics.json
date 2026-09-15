@@ -1,0 +1,14 @@
+{
+  "zh": {
+    "posts": 5474,
+    "labels": 11762,
+    "dimension_pairs_with_one_side": 10330,
+    "dimension_pairs_with_both_sides": 208
+  },
+  "en": {
+    "posts": 2884,
+    "labels": 4919,
+    "dimension_pairs_with_one_side": 4621,
+    "dimension_pairs_with_both_sides": 40
+  }
+}

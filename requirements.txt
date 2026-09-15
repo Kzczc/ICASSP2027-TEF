@@ -1,0 +1,10 @@
+# Core
+pyyaml>=6.0
+# Proprietary models, OpenAI-compatible servers, and the efficiency script
+openai>=1.40
+# Calibration plot
+matplotlib>=3.7
+# Tests
+pytest>=7.0
+# Local open-source models (install separately to match your CUDA version)
+# vllm>=0.6

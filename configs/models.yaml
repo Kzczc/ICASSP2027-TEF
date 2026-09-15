@@ -1,0 +1,64 @@
+# Model registry for scripts/infer.py and scripts/efficiency.py.
+#
+# Values of the form ${NAME} or ${NAME:-default} are read from environment variables, so no local
+# path or API key is stored in the repository. Copy .env.example to .env, fill it in, and export it.
+#
+# backend: vllm   -> local inference; model_path is a Hugging Face ID or a local directory
+# backend: openai -> any OpenAI-compatible API; api_key_env names the variable holding the key
+
+qwen2.5-7b:
+  display_name: Qwen2.5-7B
+  backend: vllm
+  model_path: ${QWEN25_7B_PATH:-Qwen/Qwen2.5-7B-Instruct}
+  tensor_parallel_size: ${QWEN25_7B_TP:-1}
+  max_model_len: 4096
+
+llama3-8b:
+  display_name: LLaMA3-8B
+  backend: vllm
+  model_path: ${LLAMA3_8B_PATH:-meta-llama/Meta-Llama-3-8B-Instruct}
+  tensor_parallel_size: ${LLAMA3_8B_TP:-1}
+  max_model_len: 4096
+
+qwen3-14b:
+  display_name: Qwen3-14B
+  backend: vllm
+  model_path: ${QWEN3_14B_PATH:-Qwen/Qwen3-14B}
+  tensor_parallel_size: ${QWEN3_14B_TP:-2}
+  max_model_len: 4096
+  enable_thinking: false
+
+deepseek-v3.2:
+  display_name: DeepSeek-V3.2
+  backend: openai
+  model: ${DEEPSEEK_MODEL:-deepseek-chat}
+  base_url: ${DEEPSEEK_BASE_URL:-https://api.deepseek.com}
+  api_key_env: DEEPSEEK_API_KEY
+  top_logprobs: 5
+  max_workers: 16
+
+gpt-4o-mini:
+  display_name: GPT-4o-mini
+  backend: openai
+  model: gpt-4o-mini
+  base_url: ${OPENAI_BASE_URL:-}
+  api_key_env: OPENAI_API_KEY
+  top_logprobs: 5
+  max_workers: 16
+
+# Local models behind `vllm serve`, used by scripts/efficiency.py to measure TTFT.
+qwen2.5-7b-server:
+  display_name: Qwen2.5-7B
+  backend: openai
+  model: ${QWEN25_7B_SERVED_NAME:-Qwen2.5-7B-Instruct}
+  base_url: ${VLLM_BASE_URL:-http://localhost:8000/v1}
+  api_key_env: VLLM_API_KEY
+  top_logprobs: 20
+
+llama3-8b-server:
+  display_name: LLaMA3-8B
+  backend: openai
+  model: ${LLAMA3_8B_SERVED_NAME:-Meta-Llama-3-8B-Instruct}
+  base_url: ${VLLM_BASE_URL:-http://localhost:8000/v1}
+  api_key_env: VLLM_API_KEY
+  top_logprobs: 20
