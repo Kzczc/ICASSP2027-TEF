@@ -2,14 +2,13 @@
 
 # Count Evidence, Not Sentences: Tempered Evidence Fusion of LLM Judgments for Long-Text Value Measurement
 
-Yuhe Wu<sup>1,*</sup>, Rui Qian<sup>2,*</sup>, Guangyu Wang<sup>1,*</sup>, Yuran Chen<sup>3</sup>, Yujie Chen<sup>4</sup>, Jiaxin Liu<sup>1</sup>, Guang Zhang<sup>1,†</sup>
+Yuhe Wu<sup>1,*</sup>, Rui Qian<sup>2,*</sup>, Guangyu Wang<sup>1,*</sup>, Yuran Chen<sup>3</sup>, Yuanchao Zhu<sup>4</sup>, Junjie Yang<sup>5</sup>,<br>
+Zhengheng Li<sup>6</sup>, Jiulin Cai<sup>7</sup>, Tianyi Zhang<sup>8</sup>, Zihan Dong<sup>9</sup>, Jiaxin Liu<sup>1</sup>, Yujie Chen<sup>10</sup>, Guang Zhang<sup>1,†</sup>
 
-<sup>1</sup>The Hong Kong University of Science and Technology (Guangzhou) &nbsp; <sup>2</sup>Fudan University<br>
-<sup>3</sup>Dongbei University of Finance and Economics &nbsp; <sup>4</sup>The Chinese University of Hong Kong, Shenzhen
+<sup>1</sup>HKUST(GZ) &nbsp; <sup>2</sup>FDU &nbsp; <sup>3</sup>DUFE &nbsp; <sup>4</sup>UESTC &nbsp; <sup>5</sup>UMD &nbsp; <sup>6</sup>SEU &nbsp; <sup>7</sup>USTC &nbsp; <sup>8</sup>Independent &nbsp; <sup>9</sup>Georgia Tech &nbsp; <sup>10</sup>CUHK(SZ)
 
-<sup>*</sup>Equal contribution &nbsp; <sup>†</sup>Corresponding author: guangzhang@hkust-gz.edu.cn
+<sup>*</sup>Equal contribution &nbsp; <sup>†</sup>Corresponding author &nbsp; {yuhewu, guangzhang}@hkust-gz.edu.cn &nbsp; qiianruii@gmail.com
 
-[![ICASSP 2027](https://img.shields.io/badge/ICASSP%202027-Submission-1f6feb)](#citation)
 [![Dataset](https://img.shields.io/badge/Dataset-MIND-ff0080)](data/README.md)
 [![Code License](https://img.shields.io/badge/Code-MIT-2ea44f)](LICENSE)
 [![Data License](https://img.shields.io/badge/Data-CC%20BY--NC%204.0-lightgrey)](https://creativecommons.org/licenses/by-nc/4.0/)
@@ -374,8 +373,7 @@ MV and SV denote Majority Vote and Soft Vote. For each model and column, the bes
 <details>
 <summary><b>Ablation of TEF</b></summary>
 
-w/o Entropy removes the entropy weighting and keeps the log-odds sum; w/o Log-Odds replaces the log-odds by entropy-weighted
-probability averaging.
+w/o Entropy keeps only the log-odds sum; w/o Log-Odds averages entropy-weighted probabilities instead of log-odds.
 
 <table>
 <thead>
@@ -450,11 +448,11 @@ If you use TEF or MIND, please cite:
 
 ```bibtex
 @misc{wu2026count,
-  title  = {Count Evidence, Not Sentences: Tempered Evidence Fusion of {LLM} Judgments for Long-Text Value Measurement},
-  author = {Wu, Yuhe and Qian, Rui and Wang, Guangyu and Chen, Yuran and Chen, Yujie and Liu, Jiaxin and Zhang, Guang},
-  year   = {2026},
-  note   = {Submitted to IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) 2027},
-  url    = {https://github.com/Kzczc/ICASSP2027-TEF}
+  title        = {Count Evidence, Not Sentences: Tempered Evidence Fusion of {LLM} Judgments for Long-Text Value Measurement},
+  author       = {Wu, Yuhe and Qian, Rui and Wang, Guangyu and Chen, Yuran and Zhu, Yuanchao and Yang, Junjie and
+                  Li, Zhengheng and Cai, Jiulin and Zhang, Tianyi and Dong, Zihan and Liu, Jiaxin and Chen, Yujie and Zhang, Guang},
+  year         = {2026},
+  howpublished = {\url{https://github.com/Kzczc/ICASSP2027-TEF}}
 }
 ```
 
