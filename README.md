@@ -1,18 +1,51 @@
 <div align="center">
 
-# Count Evidence, Not Sentences: Tempered Evidence Fusion of LLM Judgments for Long-Text Value Measurement
+<img src="assets/tef-mark.svg" width="96" alt="TEF">
 
-Yuhe Wu<sup>1,*</sup>, Rui Qian<sup>2,*</sup>, Guangyu Wang<sup>1,*</sup>, Yuran Chen<sup>3</sup>, Yuanchao Zhu<sup>4</sup>, Junjie Yang<sup>5</sup>,<br>
+# TEF
+
+### Count Evidence, Not Sentences
+
+<em>Tempered Evidence Fusion of LLM Judgments for Long-Text Value Measurement</em>
+
+<br>
+
+Yuhe Wu<sup>1,&#42;</sup>, Rui Qian<sup>2,&#42;</sup>, Guangyu Wang<sup>1,&#42;</sup>, Yuran Chen<sup>3</sup>, Yuanchao Zhu<sup>4</sup>, Junjie Yang<sup>5</sup>,<br>
 Zhengheng Li<sup>6</sup>, Jiulin Cai<sup>7</sup>, Tianyi Zhang<sup>8</sup>, Zihan Dong<sup>9</sup>, Jiaxin Liu<sup>1</sup>, Yujie Chen<sup>10</sup>, Guang Zhang<sup>1,†</sup>
 
-<sup>1</sup>HKUST(GZ) &nbsp; <sup>2</sup>FDU &nbsp; <sup>3</sup>DUFE &nbsp; <sup>4</sup>UESTC &nbsp; <sup>5</sup>UMD &nbsp; <sup>6</sup>SEU &nbsp; <sup>7</sup>USTC &nbsp; <sup>8</sup>Independent &nbsp; <sup>9</sup>Georgia Tech &nbsp; <sup>10</sup>CUHK(SZ)
+<sup>1</sup><a href="https://www.hkust-gz.edu.cn/">HKUST(GZ)</a> &nbsp;
+<sup>2</sup><a href="https://www.fudan.edu.cn/">FDU</a> &nbsp;
+<sup>3</sup><a href="https://www.dufe.edu.cn/">DUFE</a> &nbsp;
+<sup>4</sup><a href="https://www.uestc.edu.cn/">UESTC</a> &nbsp;
+<sup>5</sup><a href="https://umd.edu/">UMD</a> &nbsp;
+<sup>6</sup><a href="https://www.seu.edu.cn/">SEU</a> &nbsp;
+<sup>7</sup><a href="https://www.ustc.edu.cn/">USTC</a> &nbsp;
+<sup>8</sup>Independent &nbsp;
+<sup>9</sup><a href="https://www.gatech.edu/">Georgia Tech</a> &nbsp;
+<sup>10</sup><a href="https://www.cuhk.edu.cn/">CUHK(SZ)</a>
 
-<sup>*</sup>Equal contribution &nbsp; <sup>†</sup>Corresponding author &nbsp; {yuhewu, guangzhang}@hkust-gz.edu.cn &nbsp; qiianruii@gmail.com
+<sup>&#42;</sup>Equal contribution &nbsp;&nbsp; <sup>†</sup>Corresponding author<br>
+<a href="mailto:yuhewu@hkust-gz.edu.cn">yuhewu@hkust-gz.edu.cn</a> · <a href="mailto:guangzhang@hkust-gz.edu.cn">guangzhang@hkust-gz.edu.cn</a> · <a href="mailto:qiianruii@gmail.com">qiianruii@gmail.com</a>
 
-[![Dataset](https://img.shields.io/badge/Dataset-MIND-ff0080)](data/README.md)
-[![Code License](https://img.shields.io/badge/Code-MIT-2ea44f)](LICENSE)
-[![Data License](https://img.shields.io/badge/Data-CC%20BY--NC%204.0-lightgrey)](https://creativecommons.org/licenses/by-nc/4.0/)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-3776ab)](pyproject.toml)
+<br>
+
+![ICASSP 2027](https://img.shields.io/badge/ICASSP-2027-00629B?style=flat-square&logo=ieee&logoColor=white)
+[![Dataset](https://img.shields.io/badge/Dataset-MIND_·_8%2C358_posts-FF0080?style=flat-square)](data/README.md)
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](pyproject.toml)
+[![Code License](https://img.shields.io/badge/Code-MIT-2DA44E?style=flat-square)](LICENSE)
+[![Data License](https://img.shields.io/badge/Data-CC_BY--NC_4.0-57606A?style=flat-square&logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+<br>
+
+<table align="center">
+  <tr>
+    <td align="center" width="140"><h3>8,358</h3><sub>posts in MIND</sub></td>
+    <td align="center" width="140"><h3>6</h3><sub>value dimensions</sub></td>
+    <td align="center" width="140"><h3>2</h3><sub>languages (ZH · EN)</sub></td>
+    <td align="center" width="140"><h3>5</h3><sub>LLMs evaluated</sub></td>
+    <td align="center" width="140"><h3>+4.5 / +4.6</h3><sub>Acc / F1 gain over the best baseline</sub></td>
+  </tr>
+</table>
 
 </div>
 
@@ -22,25 +55,26 @@ Zhengheng Li<sup>6</sup>, Jiulin Cai<sup>7</sup>, Tianyi Zhang<sup>8</sup>, Ziha
 > uses the same single-token queries as voting, and outperforms the strongest of Direct, Majority Vote, and Soft Vote by
 > **4.5 accuracy** and **4.6 macro-F1** points on average across five LLMs and two languages on our benchmark **MIND**.
 
-## News
+## 📰 News
 
-- **2026-09**: Code, prompts, and the MIND benchmark (8,358 Chinese and English posts) are released.
+- **2026-09** — Code, prompts, and the MIND benchmark (8,358 Chinese and English posts) are released in this repository.
 
-## Contents
+## 🧭 Contents
 
-- [Overview](#overview)
-- [Method: Tempered Evidence Fusion](#method-tempered-evidence-fusion)
-- [The MIND Benchmark](#the-mind-benchmark)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Reproducing the Experiments](#reproducing-the-experiments)
-- [Prompts](#prompts)
-- [Results](#results)
-- [Repository Structure](#repository-structure)
-- [Citation](#citation)
-- [License](#license)
+- [Overview](#-overview)
+- [Method: Tempered Evidence Fusion](#-method-tempered-evidence-fusion)
+- [The MIND Benchmark](#%EF%B8%8F-the-mind-benchmark)
+- [Installation](#-installation)
+- [Configuration](#%EF%B8%8F-configuration)
+- [Reproducing the Experiments](#%EF%B8%8F-reproducing-the-experiments)
+- [Prompts](#-prompts)
+- [Results](#-results)
+- [Repository Structure](#-repository-structure)
+- [Citation](#%EF%B8%8F-citation)
+- [License](#-license)
+- [Contact](#-contact)
 
-## Overview
+## 🔍 Overview
 
 <p align="center">
   <img src="assets/teaser.png" width="92%" alt="Direct prediction, voting, and TEF">
@@ -51,8 +85,17 @@ Long-text value measurement requires counting informative evidence rather than t
 a few decisive ones. **Right:** TEF weights sentence log-odds by normalized information gain, discounting uncertain judgments
 so decisive evidence drives the document-level orientation.
 
+| | Direct | Majority / Soft Vote | **TEF** |
+|:--|:--|:--|:--|
+| Unit of judgment | whole post | each sentence | each sentence |
+| How sentences combine | — | one vote each, equal weight | log-odds weighted by information gain |
+| Uncertain sentences | dilute the single label | count as much as decisive ones | are tempered towards zero |
+| Extra training or queries | none | none | none |
+
 <details>
 <summary><b>Abstract</b></summary>
+
+<br>
 
 Large language models (LLMs) are increasingly used to measure public value orientations from long social media posts, yet
 such posts often mix background, quotations, concessions, and only a few stance-bearing sentences. Existing approaches either
@@ -67,7 +110,7 @@ average of 4.5 accuracy points and 4.6 macro-F1 points across five LLMs and two 
 
 </details>
 
-## Method: Tempered Evidence Fusion
+## 🧮 Method: Tempered Evidence Fusion
 
 A post $X$ is segmented into sentences $D_1,\ldots,D_N$. For a value dimension with categories
 $\mathcal{Y}=\lbrace c_1,\ldots,c_K\rbrace$ (here $K=2$: change-oriented and stability-oriented), the LLM returns a
@@ -85,7 +128,7 @@ $w_i\approx 0$ and is softly censored; a decisive sentence has $w_i\approx 1$ an
 additive statistic of Bayesian pooling under conditionally independent, calibrated sentence posteriors.
 
 | Rule | Contribution of sentence $i$ | Function |
-|---|---|---|
+|:--|:--|:--|
 | Direct | one query on the whole post, no segmentation | `tef.direct` |
 | Majority Vote | hard label $\arg\max_k p_i^{(k)}$ | `tef.majority_vote` |
 | Soft Vote | probability $p_i^{(c)}$ with equal weight | `tef.soft_vote` |
@@ -104,7 +147,7 @@ tef(p).prediction            # 'change'
 tef(p).confidence            # softmax of the two scores at temperature 5
 ```
 
-## The MIND Benchmark
+## 🗂️ The MIND Benchmark
 
 MIND (**M**ulti-event **I**nsight **N**etwork **D**imensions) contains **8,358 posts** (5,474 Chinese, 2,884 English)
 collected from X, Weibo, Reddit, Zhihu, discussion forums, and news feeds between January 2020 and January 2025.
@@ -130,7 +173,7 @@ semantic clarity.
 Radial bars report the number of labels for each value orientation in (a) Chinese and (b) English posts.
 
 | | Chinese | English |
-|---|---:|---:|
+|:--|--:|--:|
 | Posts | 5,474 | 2,884 |
 | Subcategory labels | 11,762 | 4,919 |
 | Evaluation pairs (post, dimension) | 10,330 | 4,621 |
@@ -145,7 +188,7 @@ The record format, the evaluation unit, per-dimension statistics, and the licens
  "labels": [{"dimension": "Economy", "subcategory": "Economic Models", "orientation": "Interventionist", "side": "stability"}]}
 ```
 
-## Installation
+## 🚀 Installation
 
 ```bash
 git clone https://github.com/Kzczc/ICASSP2027-TEF.git
@@ -157,10 +200,10 @@ pip install vllm   # only for local open-source models; install the build that m
 pytest -q          # unit tests; no GPU or API key required
 ```
 
-## Configuration
+## ⚙️ Configuration
 
-The repository contains no API key, model path, or machine-specific path. `configs/models.yaml` defines the five models of the
-paper and reads paths and keys from environment variables written as `${NAME}` or `${NAME:-default}`.
+`configs/models.yaml` defines the five models of the paper and reads paths and keys from environment variables
+written as `${NAME}` or `${NAME:-default}`.
 
 ```bash
 cp .env.example .env              # fill in keys and paths; .env is ignored by git
@@ -168,7 +211,7 @@ set -a && source .env && set +a   # export the variables to the current shell
 ```
 
 | Variable | Purpose | Example |
-|---|---|---|
+|:--|:--|:--|
 | `MIND_DATA_DIR` | Directory with `mind_zh.jsonl` and `mind_en.jsonl` | empty (uses `./data`) |
 | `QWEN25_7B_PATH` | Qwen2.5-7B-Instruct weights | `Qwen/Qwen2.5-7B-Instruct` or `/data/models/Qwen2.5-7B-Instruct` |
 | `LLAMA3_8B_PATH` | Meta-Llama-3-8B-Instruct weights | `meta-llama/Meta-Llama-3-8B-Instruct` |
@@ -180,9 +223,11 @@ set -a && source .env && set +a   # export the variables to the current shell
 | `OPENAI_BASE_URL` | OpenAI-compatible endpoint; empty for the official API | empty |
 | `VLLM_BASE_URL`, `VLLM_API_KEY` | vLLM server used by `scripts/efficiency.py` | `http://localhost:8000/v1`, `EMPTY` |
 
-In the paper, the open-source models are served on RTX 3090 GPUs.
+> [!NOTE]
+> The repository contains no API key, model path, or machine-specific path; everything lives in your `.env`.
+> In the paper, the open-source models are served on RTX 3090 GPUs.
 
-## Reproducing the Experiments
+## ▶️ Reproducing the Experiments
 
 Every script accepts `--help`. Reports are written as Markdown tables, with the raw numbers in a JSON file next to them.
 
@@ -241,10 +286,11 @@ python scripts/efficiency.py --model qwen2.5-7b-server --gpu-price-per-hour <USD
     --report reports/efficiency_qwen2.5-7b.md
 ```
 
-For API models, pass token prices instead, e.g.
-`python scripts/efficiency.py --model deepseek-v3.2 --price-input <USD per 1M tokens> --price-output <USD per 1M tokens>`.
+> [!TIP]
+> For API models, pass token prices instead, e.g.
+> `python scripts/efficiency.py --model deepseek-v3.2 --price-input <USD per 1M tokens> --price-output <USD per 1M tokens>`.
 
-## Prompts
+## 💬 Prompts
 
 All prompts are defined in [`tef/prompts.py`](tef/prompts.py) for Chinese and English. `original` is used in all main
 experiments; `verbose` adds role background and annotation guidelines; `minimal` keeps only the classification directive.
@@ -296,14 +342,40 @@ For 经济, `{change}` is `市场自由（经济模式）；机会平等（分�
 
 </details>
 
-## Results
+## 🏆 Results
 
 The tables below reproduce the results reported in the paper. Acc and F1 denote accuracy and macro-F1 in percent.
 Cul., Eco., Soc., Pol., Tech., and Env. denote culture, economy, society, politics, technology, and environment.
 MV and SV denote Majority Vote and Soft Vote. For each model and column, the best method is in bold.
 
+**At a glance — mean over the six dimensions (Acc / F1)**
+
+*Chinese*
+
+| Model | Direct | Majority Vote | Soft Vote | **TEF (Ours)** | Δ vs. best baseline |
+|:--|:--:|:--:|:--:|:--:|:--:|
+| Qwen2.5-7B | 62.2 / 60.7 | 56.9 / 55.9 | 57.9 / 56.7 | **71.3 / 68.1** | +9.0 / +7.4 |
+| LLaMA3-8B | 64.3 / 61.0 | 60.4 / 57.8 | 62.3 / 59.6 | **66.7 / 64.1** | +2.4 / +3.2 |
+| Qwen3-14B | 70.4 / 68.1 | 68.4 / 65.1 | 70.3 / 67.8 | **71.9 / 69.3** | +1.4 / +1.2 |
+| DeepSeek-V3.2 | 68.4 / 66.0 | 67.1 / 65.5 | 68.4 / 66.6 | **70.9 / 68.7** | +2.5 / +2.2 |
+| GPT-4o-mini | 69.0 / 63.7 | 68.2 / 63.0 | 69.2 / 63.8 | **71.2 / 68.5** | +2.0 / +4.6 |
+
+*English*
+
+| Model | Direct | Majority Vote | Soft Vote | **TEF (Ours)** | Δ vs. best baseline |
+|:--|:--:|:--:|:--:|:--:|:--:|
+| Qwen2.5-7B | 60.8 / 57.4 | 54.8 / 51.0 | 55.4 / 52.1 | **69.1 / 65.0** | +8.3 / +7.6 |
+| LLaMA3-8B | 57.2 / 52.7 | 53.8 / 49.4 | 53.8 / 49.0 | **67.3 / 63.3** | +10.1 / +10.6 |
+| Qwen3-14B | 63.9 / 56.5 | 63.6 / 58.2 | 63.7 / 57.8 | **65.0 / 59.1** | +1.1 / +0.9 |
+| DeepSeek-V3.2 | 59.0 / 56.7 | 61.2 / 57.9 | 61.6 / 58.5 | **67.2 / 63.3** | +5.7 / +4.9 |
+| GPT-4o-mini | 65.0 / 57.2 | 64.8 / 56.5 | 65.2 / 57.2 | **67.3 / 61.0** | +2.1 / +3.7 |
+
+<sub>Means are computed from the per-dimension numbers in the tables below and may differ from the paper by ±0.1 due to rounding. Averaged over the ten (model, language) pairs, TEF improves on the strongest baseline by 4.5 accuracy and 4.6 macro-F1 points.</sub>
+
 <details open>
 <summary><b>Main results on MIND (Chinese)</b></summary>
+
+<br>
 
 <table>
 <thead>
@@ -339,6 +411,8 @@ MV and SV denote Majority Vote and Soft Vote. For each model and column, the bes
 <details open>
 <summary><b>Main results on MIND (English)</b></summary>
 
+<br>
+
 <table>
 <thead>
 <tr><th rowspan="2">Model</th><th rowspan="2">Method</th><th colspan="2">Cul.</th><th colspan="2">Eco.</th><th colspan="2">Soc.</th><th colspan="2">Pol.</th><th colspan="2">Tech.</th><th colspan="2">Env.</th></tr>
@@ -373,6 +447,8 @@ MV and SV denote Majority Vote and Soft Vote. For each model and column, the bes
 <details>
 <summary><b>Ablation of TEF</b></summary>
 
+<br>
+
 w/o Entropy keeps only the log-odds sum; w/o Log-Odds averages entropy-weighted probabilities instead of log-odds.
 
 <table>
@@ -406,11 +482,11 @@ w/o Entropy keeps only the log-odds sum; w/o Log-Odds averages entropy-weighted 
 
 The prompt-robustness and efficiency analyses are reported in the paper and can be rerun with steps 5 and 6 above.
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```text
 ICASSP2027-TEF/
-├── assets/                   # figures used in this README
+├── assets/                   # figures and the TEF mark used in this README
 ├── configs/
 │   └── models.yaml           # model registry; paths and keys come from environment variables
 ├── data/
@@ -442,7 +518,7 @@ ICASSP2027-TEF/
 └── requirements.txt
 ```
 
-## Citation
+## ✍️ Citation
 
 If you use TEF or MIND, please cite:
 
@@ -456,7 +532,20 @@ If you use TEF or MIND, please cite:
 }
 ```
 
-## License
+## 📄 License
 
 The code is released under the [MIT License](LICENSE). The MIND data are released under
 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) for non-commercial research; see the [data card](data/README.md).
+
+## 📬 Contact
+
+Questions or issues? Open an [issue](https://github.com/Kzczc/ICASSP2027-TEF/issues) or write to
+[yuhewu@hkust-gz.edu.cn](mailto:yuhewu@hkust-gz.edu.cn) · [guangzhang@hkust-gz.edu.cn](mailto:guangzhang@hkust-gz.edu.cn).
+
+<br>
+
+<div align="center">
+  <sub>⭐ If TEF or MIND helps your work, a star on this repository is much appreciated.</sub>
+  <br>
+  <a href="#readme">Back to top ↑</a>
+</div>

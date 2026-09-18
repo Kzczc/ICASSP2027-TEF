@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" role="img" aria-label="TEF: Tempered Evidence Fusion">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1F6FEB"/>
+      <stop offset="1" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- card -->
+  <rect x="6" y="6" width="188" height="188" rx="40" fill="url(#bg)"/>
+  <rect x="6" y="6" width="188" height="188" rx="40" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2"/>
+
+  <!-- sentence-level evidence: decisive sentences are tall and solid, uncertain ones are short and tempered away -->
+  <g transform="translate(0,4)">
+    <rect x="38"  y="70"  width="20" height="82" rx="6" fill="url(#bar)"/>
+    <rect x="66"  y="122" width="20" height="30" rx="6" fill="#FFFFFF" fill-opacity="0.32"/>
+    <rect x="94"  y="128" width="20" height="24" rx="6" fill="#FFFFFF" fill-opacity="0.28"/>
+    <rect x="122" y="56"  width="20" height="96" rx="6" fill="url(#bar)"/>
+    <rect x="150" y="118" width="20" height="34" rx="6" fill="#FFFFFF" fill-opacity="0.32"/>
+    <!-- baseline -->
+    <rect x="30" y="156" width="148" height="4" rx="2" fill="#FFFFFF" fill-opacity="0.55"/>
+  </g>
+
+  <!-- fused decision: a single confident marker above the evidence -->
+  <g transform="translate(100,38)">
+    <circle r="15" fill="#FFFFFF"/>
+    <path d="M -7 0 L -2 5 L 8 -6" fill="none" stroke="#1F6FEB" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
