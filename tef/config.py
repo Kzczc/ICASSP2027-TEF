@@ -11,6 +11,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 from .data import REPO_ROOT
 
 _ENV_PATTERN = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)(?::-([^}]*))?\}")
@@ -28,8 +30,6 @@ def _expand(value: Any) -> Any:
 
 
 def load_model_config(name: str, path: str | os.PathLike | None = None) -> dict[str, Any]:
-    import yaml
-
     config_path = Path(path or DEFAULT_MODEL_CONFIG)
     with config_path.open(encoding="utf-8") as handle:
         registry = yaml.safe_load(handle)

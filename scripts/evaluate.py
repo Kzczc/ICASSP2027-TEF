@@ -7,35 +7,23 @@ Example:
 
 from __future__ import annotations
 
-from dataclasses import asdict
-
-from _report import LANG_NAMES, base_parser, dimension_columns, emit, markdown_table
+from _report import LANG_NAMES, acc_f1_cells, acc_f1_header, base_parser, display_name, emit, markdown_table, table_payload
 from tef.fusion import METHOD_NAMES
 from tef.pipeline import cache_path, dimension_table, load_records
-from tef.schema import TABLE_ORDER
 
 METHODS = ("direct", "majority_vote", "soft_vote", "tef")
 
 
 def main() -> None:
-    parser = base_parser(__doc__)
-    parser.add_argument("--prompt", default="original")
-    args = parser.parse_args()
-
+    args = base_parser(__doc__, prompt=True).parse_args()
     sections, payload = [], {}
     for lang in args.lang:
-        header = ["Model", "Method"] + [f"{c} {m}" for c in dimension_columns() + ["Avg."] for m in ("Acc", "F1")]
         rows = []
         for model in args.models:
             table = dimension_table(load_records(cache_path(args.output_dir, model, args.prompt, lang)), METHODS)
-            payload.setdefault(lang, {})[model] = {m: {d: asdict(s) for d, s in row.items()} for m, row in table.items()}
-            for method in METHODS:
-                cells = []
-                for dimension in list(TABLE_ORDER) + ["Average"]:
-                    s = table[method].get(dimension)
-                    cells += [f"{s.accuracy:.1f}", f"{s.macro_f1:.1f}"] if s else ["-", "-"]
-                rows.append([model, METHOD_NAMES[method]] + cells)
-        sections.append(f"### {LANG_NAMES[lang]}\n\n" + markdown_table(header, rows))
+            payload.setdefault(lang, {})[model] = table_payload(table)
+            rows += [[display_name(model), METHOD_NAMES[m]] + acc_f1_cells(table[m]) for m in METHODS]
+        sections.append(f"### {LANG_NAMES[lang]}\n\n" + markdown_table(acc_f1_header("Model", "Method"), rows))
     emit("\n\n".join(sections), args.report, payload)
 
 

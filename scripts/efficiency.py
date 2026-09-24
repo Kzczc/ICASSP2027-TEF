@@ -26,7 +26,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from _report import emit, markdown_table  # noqa: E402
+from _report import display_name, emit, markdown_table  # noqa: E402
 from tef.backends.base import probability_from_logprobs  # noqa: E402
 from tef.config import load_model_config  # noqa: E402
 from tef.data import LANGUAGES, evaluation_items, load_posts  # noqa: E402
@@ -56,9 +56,10 @@ class Client:
     def __init__(self, config: dict) -> None:
         from openai import OpenAI
 
-        key = os.environ.get(config.get("api_key_env", "OPENAI_API_KEY"))
+        key_env = config.get("api_key_env", "OPENAI_API_KEY")
+        key = os.environ.get(key_env)
         if not key:
-            raise RuntimeError(f"environment variable {config.get('api_key_env')} is not set")
+            raise RuntimeError(f"environment variable {key_env} is not set (see .env.example)")
         self.model = config["model"]
         self.top_logprobs = int(config.get("top_logprobs", 5))
         self.client = OpenAI(api_key=key, base_url=config.get("base_url") or None)
@@ -146,7 +147,7 @@ def main() -> None:
             cost = (m["input_tokens"] * args.price_input + m["output_tokens"] * args.price_output) / 1e6
         m["cost_usd"] = cost
         tokens = (m["input_tokens"] + m["output_tokens"]) / 1e6
-        rows.append([args.model, method, f"{tokens:.2f}", f"{m['mean_ttft_ms']:.1f}", f"{cost:.2f}", str(m["requests"])])
+        rows.append([display_name(args.model), method, f"{tokens:.2f}", f"{m['mean_ttft_ms']:.1f}", f"{cost:.2f}", str(m["requests"])])
     table = markdown_table(["Model", "Method", "Tokens (M)", "TTFT (ms)", "Cost ($)", "Requests"], rows)
     emit(table, args.report, measured)
     if not args.report:

@@ -34,14 +34,13 @@ class VLLMBackend:
             seed=seed,
         )
         self._tokenizer = self._llm.get_tokenizer()
-        # The answer is read from the log-probabilities of the first generated token, without sampling.
         self._params = SamplingParams(max_tokens=1, temperature=0.0, logprobs=top_logprobs)
         self._enable_thinking = enable_thinking
 
     def _format(self, prompt: str) -> str:
         messages = [{"role": "user", "content": prompt}]
         try:
-            # Qwen3 chat templates accept ``enable_thinking``; other templates ignore unknown variables.
+            # Only Qwen3 templates read enable_thinking; older tokenizers reject the extra keyword.
             return self._tokenizer.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True, enable_thinking=self._enable_thinking
             )

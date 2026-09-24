@@ -2,11 +2,37 @@
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable
 
 from .base import AnswerScore, Backend, probability_from_logprobs
 
 __all__ = ["AnswerScore", "Backend", "create_backend", "probability_from_logprobs"]
+
+
+def _as_bool(value: Any) -> bool:
+    return value if isinstance(value, bool) else str(value).strip().lower() in ("1", "true", "yes")
+
+
+_VLLM_OPTIONS: dict[str, Callable[[Any], Any]] = {
+    "tensor_parallel_size": int,
+    "max_model_len": int,
+    "gpu_memory_utilization": float,
+    "top_logprobs": int,
+    "enable_thinking": _as_bool,
+}
+_OPENAI_OPTIONS: dict[str, Callable[[Any], Any]] = {
+    "api_key_env": str,
+    "base_url": str,
+    "top_logprobs": int,
+    "max_workers": int,
+    "max_retries": int,
+    "timeout": float,
+}
+
+
+def _options(config: dict[str, Any], casts: dict[str, Callable[[Any], Any]]) -> dict[str, Any]:
+    # Environment expansion turns numbers into strings, and an unset variable into "".
+    return {key: cast(config[key]) for key, cast in casts.items() if config.get(key) not in (None, "")}
 
 
 def create_backend(config: dict[str, Any]) -> Backend:
@@ -15,26 +41,9 @@ def create_backend(config: dict[str, Any]) -> Backend:
     if kind == "vllm":
         from .vllm_backend import VLLMBackend
 
-        return VLLMBackend(
-            model_path=config["model_path"],
-            name=config.get("name"),
-            tensor_parallel_size=int(config.get("tensor_parallel_size", 1)),
-            max_model_len=int(config.get("max_model_len", 4096)),
-            gpu_memory_utilization=float(config.get("gpu_memory_utilization", 0.9)),
-            top_logprobs=int(config.get("top_logprobs", 20)),
-            enable_thinking=bool(config.get("enable_thinking", False)),
-        )
+        return VLLMBackend(config["model_path"], name=config.get("name"), **_options(config, _VLLM_OPTIONS))
     if kind == "openai":
         from .openai_backend import OpenAIBackend
 
-        return OpenAIBackend(
-            model=config["model"],
-            name=config.get("name"),
-            api_key_env=config.get("api_key_env", "OPENAI_API_KEY"),
-            base_url=config.get("base_url") or None,
-            top_logprobs=int(config.get("top_logprobs", 5)),
-            max_workers=int(config.get("max_workers", 8)),
-            max_retries=int(config.get("max_retries", 6)),
-            timeout=float(config.get("timeout", 60)),
-        )
+        return OpenAIBackend(config["model"], name=config.get("name"), **_options(config, _OPENAI_OPTIONS))
     raise ValueError(f"unknown backend {kind!r} in model config {config.get('name')!r}")

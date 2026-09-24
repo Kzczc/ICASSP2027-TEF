@@ -25,7 +25,11 @@ CONFIDENCE_TEMPERATURE = 5.0
 
 @dataclass(frozen=True)
 class FusionResult:
-    """Decision of a fusion rule for one post and one dimension."""
+    """Decision of a fusion rule for one post and one dimension.
+
+    ``change_score`` is what the rule compares: Score(change) for TEF and w/o Entropy, the share of
+    change-oriented votes for Majority Vote, and the (weighted) mean probability for the other rules.
+    """
 
     prediction: str
     confidence: float
@@ -57,7 +61,6 @@ def information_gain_weight(p: float) -> float:
 
 
 def _decide(change_value: float, stability_value: float) -> str:
-    # Ties go to the change-oriented position, as in the original implementation.
     return CHANGE if change_value >= stability_value else STABILITY
 
 
@@ -94,6 +97,15 @@ def soft_vote(probabilities: Sequence[float]) -> FusionResult:
     return FusionResult(prediction, max(mean, 1.0 - mean), mean)
 
 
+def _log_odds_fusion(
+    values: list[float], weights: list[float], epsilon: float, clip_bound: float, temperature: float
+) -> FusionResult:
+    change_score = sum(w * clipped_log_odds(p, epsilon, clip_bound) for w, p in zip(weights, values))
+    stability_score = sum(w * clipped_log_odds(1.0 - p, epsilon, clip_bound) for w, p in zip(weights, values))
+    prediction = _decide(change_score, stability_score)
+    return FusionResult(prediction, _softmax_confidence(change_score, stability_score, prediction, temperature), change_score)
+
+
 def tef(
     probabilities: Sequence[float],
     epsilon: float = EPSILON,
@@ -102,17 +114,11 @@ def tef(
 ) -> FusionResult:
     """Tempered Evidence Fusion.
 
-    The confidence is the softmax of the two position scores at ``temperature`` (5.0 for the
-    calibration analysis of the paper).
+    The confidence, used only by the calibration analysis, is the softmax of the two position
+    scores at ``temperature``.
     """
     values = _check(probabilities)
-    change_score = stability_score = 0.0
-    for p in values:
-        w = information_gain_weight(p)
-        change_score += w * clipped_log_odds(p, epsilon, clip_bound)
-        stability_score += w * clipped_log_odds(1.0 - p, epsilon, clip_bound)
-    prediction = _decide(change_score, stability_score)
-    return FusionResult(prediction, _softmax_confidence(change_score, stability_score, prediction, temperature), change_score)
+    return _log_odds_fusion(values, [information_gain_weight(p) for p in values], epsilon, clip_bound, temperature)
 
 
 def tef_without_entropy(
@@ -123,10 +129,7 @@ def tef_without_entropy(
 ) -> FusionResult:
     """Ablation "w/o Entropy": equal weights, clipped log-odds sum."""
     values = _check(probabilities)
-    change_score = sum(clipped_log_odds(p, epsilon, clip_bound) for p in values)
-    stability_score = sum(clipped_log_odds(1.0 - p, epsilon, clip_bound) for p in values)
-    prediction = _decide(change_score, stability_score)
-    return FusionResult(prediction, _softmax_confidence(change_score, stability_score, prediction, temperature), change_score)
+    return _log_odds_fusion(values, [1.0] * len(values), epsilon, clip_bound, temperature)
 
 
 def tef_without_log_odds(probabilities: Sequence[float]) -> FusionResult:

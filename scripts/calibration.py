@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from dataclasses import asdict
 
-from _report import LANG_NAMES, base_parser, emit, markdown_table
+from _report import LANG_NAMES, base_parser, display_name, emit, markdown_table
 from tef.fusion import METHOD_NAMES
 from tef.pipeline import cache_path, load_records, score_records
 
@@ -43,9 +43,8 @@ def plot(results: dict, path: str) -> None:
 
 
 def main() -> None:
-    parser = base_parser(__doc__)
+    parser = base_parser(__doc__, prompt=True)
     parser.set_defaults(models=["qwen2.5-7b"])
-    parser.add_argument("--prompt", default="original")
     parser.add_argument("--plot", default=None, help="save a bar chart of the first model to this file")
     args = parser.parse_args()
 
@@ -57,7 +56,7 @@ def main() -> None:
             for method in METHODS:
                 s = score_records(records, method)
                 payload.setdefault(model, {}).setdefault(lang, {})[method] = asdict(s)
-                rows.append([model, LANG_NAMES[lang], METHOD_NAMES[method], f"{s.accuracy:.1f}", f"{100 * s.ece:.1f}", f"{100 * s.overconfidence_gap:.1f}", str(s.n)])
+                rows.append([display_name(model), LANG_NAMES[lang], METHOD_NAMES[method], f"{s.accuracy:.1f}", f"{100 * s.ece:.1f}", f"{100 * s.overconfidence_gap:.1f}", str(s.n)])
     emit(markdown_table(header, rows), args.report, payload)
     if args.plot:
         plot(payload[args.models[0]], args.plot)

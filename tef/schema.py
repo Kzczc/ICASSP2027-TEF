@@ -43,9 +43,6 @@ class Dimension:
     abbreviation: str
     subcategories: tuple[Subcategory, Subcategory]
 
-    def positions(self, side: str) -> tuple[Position, Position]:
-        return tuple(sub.position(side) for sub in self.subcategories)  # type: ignore[return-value]
-
 
 def _subcategory(name: str, name_zh: str, change: tuple[str, str], stability: tuple[str, str]) -> Subcategory:
     return Subcategory(
@@ -56,7 +53,6 @@ def _subcategory(name: str, name_zh: str, change: tuple[str, str], stability: tu
     )
 
 
-# Order of the dimension schema: Politics, Economy, Culture, Society, Environment, Technology.
 DIMENSIONS: tuple[Dimension, ...] = (
     Dimension("Politics", "政治", "Pol.", (
         _subcategory("Policy Orientations", "政策导向", ("Revolutionism", "革命主义"), ("Reformism", "改良主义")),
