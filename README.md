@@ -91,7 +91,8 @@ so decisive evidence drives the document-level orientation.
 | Unit of judgment | whole post | each sentence | each sentence |
 | How sentences combine | — | one vote each, equal weight | log-odds weighted by information gain |
 | Uncertain sentences | dilute the single label | count as much as decisive ones | are tempered towards zero |
-| Extra training or queries | none | none | none |
+| Queries per post | one | one per sentence | one per sentence, the same as voting |
+| Extra training | none | none | none |
 
 <details>
 <summary><b>Abstract</b></summary>
@@ -371,7 +372,7 @@ MV and SV denote Majority Vote and Soft Vote. For each model and column, the bes
 | DeepSeek-V3.2 | 59.0 / 56.7 | 61.2 / 57.9 | 61.6 / 58.5 | **67.2 / 63.3** | +5.7 / +4.9 |
 | GPT-4o-mini | 65.0 / 57.2 | 64.8 / 56.5 | 65.2 / 57.2 | **67.3 / 61.0** | +2.1 / +3.7 |
 
-<sub>Means are computed from the per-dimension numbers in the tables below and may differ from the paper by ±0.1 due to rounding. Averaged over the ten (model, language) pairs, TEF improves on the strongest baseline by 4.5 accuracy and 4.6 macro-F1 points.</sub>
+<sub>Means over the six dimensions are computed from the tables below. Averaged over the ten (model, language) pairs, TEF improves on the strongest baseline by 4.5 accuracy and 4.6 macro-F1 points, and it is the best or tied for best in 116 of 120 dimension-level comparisons.</sub>
 
 <details open>
 <summary><b>Main results on MIND (Chinese)</b></summary>
@@ -481,7 +482,30 @@ w/o Entropy keeps only the log-odds sum; w/o Log-Odds averages entropy-weighted 
   <img src="assets/calibration.png" width="70%" alt="Expected calibration error and overconfidence gap on Qwen2.5-7B">
 </p>
 
-The prompt-robustness and efficiency analyses are reported in the paper and can be rerun with steps 5 and 6 above.
+**Prompt robustness.** Average accuracy over both languages when every method is rerun with the verbose and minimal
+prompts. TEF remains best under every prompt and degrades the least under either perturbation.
+
+| Model | Strongest baseline<br>Original | <br>Verbose | <br>Minimal | **TEF**<br>Original | <br>Verbose | <br>Minimal |
+|:--|:--:|:--:|:--:|:--:|:--:|:--:|
+| Qwen2.5-7B | 61.5 | 60.8 | 59.2 | **70.2** | **69.8** | **68.6** |
+| LLaMA3-8B | 60.8 | 60.0 | 58.2 | **67.0** | **66.4** | **65.3** |
+| Qwen3-14B | 67.2 | 66.5 | 64.8 | **68.4** | **67.9** | **66.8** |
+| DeepSeek-V3.2 | 65.0 | 64.3 | 62.7 | **69.1** | **68.5** | **67.5** |
+| GPT-4o-mini | 67.2 | 66.5 | 65.0 | **69.3** | **68.8** | **67.8** |
+
+**Efficiency.** Total tokens and cost over the twelve evaluation subsets, and mean time to first token (TTFT) on RTX 3090
+GPUs. TEF issues the same single-token queries as voting, so its token count is identical.
+
+| Model | Method | Tokens (M) | TTFT (ms) | Cost ($) |
+|:--|:--|--:|--:|--:|
+| Qwen2.5-7B | Direct | 0.5 | 23.7 | 0.09 |
+| | Voting (MV, SV) | 2.7 | 14.4 | 0.27 |
+| | **TEF** | 2.7 | 15.8 | 0.28 |
+| LLaMA3-8B | Direct | 0.6 | 28.6 | 0.10 |
+| | Voting (MV, SV) | 3.1 | 15.2 | 0.28 |
+| | **TEF** | 3.1 | 17.3 | 0.30 |
+
+Both analyses can be rerun with steps 5 and 6 of [Reproducing the Experiments](#%EF%B8%8F-reproducing-the-experiments).
 
 ## 📁 Repository Structure
 
