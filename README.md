@@ -29,7 +29,7 @@ Zhengheng Li<sup>6</sup>, Jiulin Cai<sup>7</sup>, Tianyi Zhang<sup>8</sup>, Ziha
 
 <br>
 
-![ICASSP 2027](https://img.shields.io/badge/ICASSP-2027-00629B?style=flat-square&logo=ieee&logoColor=white)
+[![arXiv](https://img.shields.io/badge/arXiv-2609.27165-B31B1B?style=flat-square&logo=arxiv&logoColor=white)](https://arxiv.org/abs/2609.27165)
 [![Dataset](https://img.shields.io/badge/Dataset-MIND_·_8%2C358_posts-FF0080?style=flat-square)](data/README.md)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](pyproject.toml)
 [![Code License](https://img.shields.io/badge/Code-MIT-2DA44E?style=flat-square)](LICENSE)
@@ -57,6 +57,7 @@ Zhengheng Li<sup>6</sup>, Jiulin Cai<sup>7</sup>, Tianyi Zhang<sup>8</sup>, Ziha
 
 ## 📰 News
 
+- **2026-09** — The preprint is on [arXiv](https://arxiv.org/abs/2609.27165).
 - **2026-09** — Code, prompts, and the MIND benchmark (8,358 Chinese and English posts) are released in this repository.
 
 ## 🧭 Contents
@@ -524,11 +525,14 @@ If you use TEF or MIND, please cite:
 
 ```bibtex
 @misc{wu2026count,
-  title        = {Count Evidence, Not Sentences: Tempered Evidence Fusion of {LLM} Judgments for Long-Text Value Measurement},
-  author       = {Wu, Yuhe and Qian, Rui and Wang, Guangyu and Chen, Yuran and Zhu, Yuanchao and Yang, Junjie and
-                  Li, Zhengheng and Cai, Jiulin and Zhang, Tianyi and Dong, Zihan and Liu, Jiaxin and Chen, Yujie and Zhang, Guang},
-  year         = {2026},
-  howpublished = {\url{https://github.com/Kzczc/ICASSP2027-TEF}}
+  title         = {Count Evidence, Not Sentences: Tempered Evidence Fusion of {LLM} Judgments for Long-Text Value Measurement},
+  author        = {Wu, Yuhe and Qian, Rui and Wang, Guangyu and Chen, Yuran and Zhu, Yuanchao and Yang, Junjie and
+                   Li, Zhengheng and Cai, Jiulin and Zhang, Tianyi and Dong, Zihan and Liu, Jiaxin and Chen, Yujie and Zhang, Guang},
+  year          = {2026},
+  eprint        = {2609.27165},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2609.27165}
 }
 ```
 
